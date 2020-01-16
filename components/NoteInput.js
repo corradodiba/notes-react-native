@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TextInput, StyleSheet, View, Button } from "react-native";
+import { TextInput, StyleSheet, View, Button, Modal } from "react-native";
 
-const NoteInput = ({ onSetNotes }) => {
+const NoteInput = ({ onSetNotes, visibility }) => {
   const [enteredNote, setEnteredNote] = useState("");
 
   const noteInputHandler = (text) => {
@@ -9,16 +9,18 @@ const NoteInput = ({ onSetNotes }) => {
   };
 
   return (
-    <View style={styles.inputWrapper}>
-      <TextInput
-        style={styles.inputContent}
-        placeholder="enter your note"
-        onChangeText={noteInputHandler}
-        value={enteredNote}
-      />
+    <Modal animationType="fade" visible={visibility}>
+      <View style={styles.inputWrapper}>
+        <TextInput
+          style={styles.inputContent}
+          placeholder="enter your note"
+          onChangeText={noteInputHandler}
+          value={enteredNote}
+        />
 
-      <Button title="Add" onPress={onSetNotes.bind(this, enteredNote)} />
-    </View>
+        <Button title="Add" onPress={onSetNotes.bind(this, enteredNote)} />
+      </View>
+    </Modal>
   );
 };
 

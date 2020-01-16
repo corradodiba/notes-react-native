@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, FlatList } from "react-native";
+import { View, StyleSheet, ScrollView, FlatList, Button } from "react-native";
 
 import NoteItem from "./components/NoteItem";
 import NoteInput from "./components/NoteInput";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
+  const [isAddNote, setIsAddNote] = useState(false);
 
   const setNoteHandler = (noteText) => {
     setNotes((currentNotes) => [...currentNotes, noteText]);
@@ -19,7 +20,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <NoteInput onSetNotes={setNoteHandler} />
+      <Button title="Add new note" onPress={() => setIsAddNote(true)} />
+      <NoteInput visibility={isAddNote} onSetNotes={setNoteHandler} />
       {/* <ScrollView style={styles.listWrapper}>
         {notes.map((note, index) => (
           <View key={`${index}-${note}`} style={styles.listItem}>
