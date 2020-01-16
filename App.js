@@ -10,6 +10,7 @@ export default function App() {
 
   const setNoteHandler = (noteText) => {
     setNotes((currentNotes) => [...currentNotes, noteText]);
+    setIsAddNote(false);
   };
 
   const onDeleteNoteHandler = (noteIndex) => {
@@ -21,7 +22,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button title="Add new note" onPress={() => setIsAddNote(true)} />
-      <NoteInput visibility={isAddNote} onSetNotes={setNoteHandler} />
+      <NoteInput
+        visibility={isAddNote}
+        onSetNotes={setNoteHandler}
+        onCancel={setIsAddNote}
+      />
       {/* <ScrollView style={styles.listWrapper}>
         {notes.map((note, index) => (
           <View key={`${index}-${note}`} style={styles.listItem}>

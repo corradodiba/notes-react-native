@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { TextInput, StyleSheet, View, Button, Modal } from "react-native";
 
-const NoteInput = ({ onSetNotes, visibility }) => {
+const NoteInput = ({ onSetNotes, visibility, onCancel }) => {
   const [enteredNote, setEnteredNote] = useState("");
 
   const noteInputHandler = (text) => {
     setEnteredNote(text);
+  };
+
+  const addButtonHandler = () => {
+    onSetNotes(enteredNote);
+    setEnteredNote("");
+  };
+
+  const cancelButtonHandler = () => {
+    onCancel(false);
   };
 
   return (
@@ -18,7 +27,14 @@ const NoteInput = ({ onSetNotes, visibility }) => {
           value={enteredNote}
         />
 
-        <Button title="Add" onPress={onSetNotes.bind(this, enteredNote)} />
+        <View style={styles.buttonsWrapper}>
+          <View style={styles.button}>
+            <Button title="Add" onPress={addButtonHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={cancelButtonHandler} color="red" />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -36,7 +52,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     flex: 1,
-    paddingHorizontal: "5%"
+    padding: "2%"
+  },
+  buttonsWrapper: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "2%",
+    height: "10%"
+  },
+  button: {
+    width: "40%",
+    padding: "2%"
   }
 });
 
