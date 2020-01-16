@@ -33,8 +33,10 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   inputWrapper: {
-    flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignContent: "center",
+    flex: 1,
+    paddingHorizontal: "5%"
   }
 });
 
